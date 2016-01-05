@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Abp</RootNamespace>
     <AssemblyName>Abp.Zero</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,8 +35,8 @@
     <DocumentationFile>bin\Release\Abp.Zero.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Abp, Version=0.7.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.0.7.3.0\lib\net451\Abp.dll</HintPath>
+    <Reference Include="Abp, Version=0.7.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.0.7.7.0\lib\net452\Abp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
@@ -52,8 +53,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Nito.AsyncEx, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -85,6 +86,26 @@
   <ItemGroup>
     <Compile Include="Application\Editions\EditionfeatureCacheItem.cs" />
     <Compile Include="Application\Editions\AbpEditionManager.cs" />
+    <Compile Include="Authorization\Roles\AbpRoleBase.cs" />
+    <Compile Include="Authorization\Roles\AbpRolePermissionCacheItemInvalidator.cs" />
+    <Compile Include="Authorization\Users\AbpUserBase.cs" />
+    <Compile Include="Authorization\Users\AbpUserPermissionCacheItemInvalidator.cs" />
+    <Compile Include="Authorization\Users\UserOrganizationUnit.cs" />
+    <Compile Include="Localization\ApplicationLanguage.cs" />
+    <Compile Include="Localization\ApplicationLanguageManager.cs" />
+    <Compile Include="Localization\ApplicationLanguageProvider.cs" />
+    <Compile Include="Localization\ApplicationLanguageText.cs" />
+    <Compile Include="Localization\ApplicationLanguageTextManager.cs" />
+    <Compile Include="Localization\IApplicationLanguageTextManager.cs" />
+    <Compile Include="Localization\MultiTenantLocalizationDictionary.cs" />
+    <Compile Include="Localization\MultiTenantLocalizationDictionaryCacheCleaner.cs" />
+    <Compile Include="Localization\MultiTenantLocalizationDictionaryCacheHelper.cs" />
+    <Compile Include="Localization\MultiTenantLocalizationDictionaryProvider.cs" />
+    <Compile Include="Localization\EmptyDictionary.cs" />
+    <Compile Include="Localization\IApplicationLanguageManager.cs" />
+    <Compile Include="Localization\IMultiTenantLocalizationDictionary.cs" />
+    <Compile Include="Localization\IMultiTenantLocalizationSource.cs" />
+    <Compile Include="Localization\MultiTenantLocalizationSource.cs" />
     <Compile Include="MultiTenancy\TenantFeatureCacheItem.cs" />
     <Compile Include="Auditing\AuditingStore.cs" />
     <Compile Include="Auditing\AuditLog.cs" />
@@ -115,6 +136,11 @@
     <Compile Include="Authorization\Roles\AbpRoleManager.cs" />
     <Compile Include="MultiTenancy\TenantFeatureCacheItemInvalidator.cs" />
     <Compile Include="MultiTenancy\TenantFeatureSetting.cs" />
+    <Compile Include="Organizations\IMustHaveOrganizationUnit.cs" />
+    <Compile Include="Organizations\IMayHaveOrganizationUnit.cs" />
+    <Compile Include="Organizations\OrganizationUnit.cs" />
+    <Compile Include="Organizations\OrganizationUnitManager.cs" />
+    <Compile Include="Organizations\OrganizationUnitSettings.cs" />
     <Compile Include="Runtime\Caching\AbpZeroCacheManagerExtensions.cs" />
     <Compile Include="Runtime\Session\IdentityFrameworkClaimsAbpSession.cs" />
     <Compile Include="Configuration\SettingStore.cs" />
@@ -130,12 +156,14 @@
     <Compile Include="Authorization\Users\UserLogin.cs" />
     <Compile Include="Zero\AbpZeroConsts.cs" />
     <Compile Include="Zero\AbpZeroCoreModule.cs" />
-    <Compile Include="Utils\Helpers\RandomHelper.cs" />
     <Compile Include="Zero\Configuration\AbpZeroSettingNames.cs" />
     <Compile Include="Zero\Configuration\AbpZeroSettingProvider.cs" />
     <Compile Include="Zero\Configuration\IAbpZeroConfig.cs" />
+    <Compile Include="Zero\Configuration\ILanguageManagementConfig.cs" />
+    <Compile Include="Organizations\IOrganizationUnitSettings.cs" />
     <Compile Include="Zero\Configuration\IRoleManagementConfig.cs" />
     <Compile Include="Zero\Configuration\IUserManagementConfig.cs" />
+    <Compile Include="Zero\Configuration\LanguageManagementConfig.cs" />
     <Compile Include="Zero\Configuration\ModuleZeroConfigurationExtensions.cs" />
     <Compile Include="Zero\Configuration\AbpZeroConfig.cs" />
     <Compile Include="Zero\Configuration\RoleManagementConfig.cs" />
@@ -144,7 +172,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Abp.Zero.nuspec" />
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -157,6 +187,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Zero\Localization\Source\AbpZero-zh-CN.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-de.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
